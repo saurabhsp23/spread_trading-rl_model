@@ -15,7 +15,7 @@ src/
 │   ├── trading_environment.py # Custom trading environment.
 │   ├── dqn_agent.py      # DQN agent and replay buffer.
 │   ├── indicators.py     # MACD and RSI calculation.\
-├── data/
+data/
 │   ├── JPY.xlsx          # Sample JPY data.
 │   ├── EUR.xlsx          # Sample EUR data.
 │   ├── AUD.xlsx          # Sample AUD data.
