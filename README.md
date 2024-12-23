@@ -1,66 +1,124 @@
+# Project: Trading Environment with DQN Agent
 
-# RL Trading System
+## Overview
+This project implements a trading environment using Deep Q-Learning (DQN) with a modularized structure. It includes data preprocessing, a custom trading environment, a DQN agent with a Transformer-based model, and utilities for indicators like MACD and RSI. The code is organized for clarity and scalability.
 
-This project implements a deep reinforcement learning-based trading system using a modular design for maintainability and scalability.
+## Project Structure
 
-## Source code Explanation
+```
+project/
+│   ├── train.py          # Handles the training loop.
+│   ├── validate.py       # Validation logic and early stopping.
+│   ├── test.py           # Testing and result logging.
+│   ├── run_pipeline.py   # Main orchestrator for the workflow.
+│   ├── transformer_model.py  # Transformer-based model definition.
+│   ├── trading_environment.py # Custom trading environment.
+│   ├── dqn_agent.py      # DQN agent and replay buffer.
+│   ├── indicators.py     # MACD and RSI calculation.\
+├── data/
+│   ├── JPY.xlsx          # Sample JPY data.
+│   ├── EUR.xlsx          # Sample EUR data.
+│   ├── AUD.xlsx          # Sample AUD data.
+│   ├── CAD.xlsx          # Sample CAD data.
+```
 
-- **`environment.py`**: Contains the `TradingEnvironment` class for simulating the trading environment.
-- **`agent.py`**: Implements the `DQNAgent` and `ReplayBuffer` classes for reinforcement learning.
-- **`transformer_model.py`**: Defines the Transformer model architecture.
-- **`indicators.py`**: Provides technical indicator calculations such as MACD and RSI.
-- **`data_processing.py`**: Handles data loading and preprocessing.
-- **`main.py`**: Orchestrates the entire workflow, including training, validation, and testing.
+## Key Features
 
-## How to Run
+1. **Custom Trading Environment**
+   - Simulates trading using financial data.
+   - Implements step, reset, and reward mechanisms.
 
-1. **Install Dependencies**:
-   Ensure you have the required Python libraries installed. Use the following command:
+2. **DQN Agent with Transformer**
+   - Utilizes a Transformer model for feature extraction.
+   - Includes epsilon-greedy exploration, replay buffer, and gradient updates.
+
+3. **Data Preprocessing and Indicators**
+   - Supports MACD and RSI calculations for feature engineering.
+   - Preprocesses data to handle missing values and normalize inputs.
+
+4. **Pipeline Workflow**
+   - Training: Optimizes the DQN agent on a trading environment.
+   - Validation: Monitors performance and applies early stopping.
+   - Testing: Evaluates agent performance and logs results.
+
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.8+
+- Required Libraries: Install via `pip install -r requirements.txt`
+  ```
+  pandas
+  numpy
+  torch
+  scikit-learn
+  matplotlib
+  ```
+
+### Steps to Run the Project
+
+1. Clone the repository:
    ```bash
-   pip install pandas numpy torch matplotlib
+   git clone <repository_url>
+   cd project
    ```
 
-2. **Prepare Data**:
-   Place your financial data files (e.g., `JPY.xlsx`, `EUR.xlsx`) in the `../data/` directory.
+2. Prepare data files:
+   - Place JPY.xlsx, EUR.xlsx, AUD.xlsx, CAD.xlsx in the `data/` directory.
 
-3. **Run the Code**:
-   Execute `main.py` to start the training process:
+3. Run the pipeline:
    ```bash
-   python main.py
+   python scripts/run_pipeline.py
    ```
 
-## Features
+## Modularized Workflow
 
-1. **Trading Environment**:
-   - Simulates a trading environment with reward calculation and state management.
+### Data Loading and Preprocessing
+- **File:** `data_preprocessing.py`
+- **Description:**
+  - Load data from Excel files.
+  - Calculate indicators (MACD, RSI).
+  - Normalize and handle missing values.
 
-2. **Deep Q-Learning Agent**:
-   - Uses a Transformer-based architecture for predicting actions in the trading environment.
-   - Includes epsilon-greedy exploration for learning.
+### Training
+- **File:** `train.py`
+- **Description:**
+  - Implements the training loop for the DQN agent.
+  - Saves intermediate results and models.
 
-3. **Technical Indicators**:
-   - Computes technical indicators like MACD and RSI to enhance state representation.
+### Validation
+- **File:** `validate.py`
+- **Description:**
+  - Evaluates the agent’s performance on validation data.
+  - Implements early stopping logic.
 
-4. **Data Preprocessing**:
-   - Loads and preprocesses financial data for training.
+### Testing
+- **File:** `test.py`
+- **Description:**
+  - Runs the agent on test data and evaluates performance metrics like cumulative returns.
 
-5. **Modular Design**:
-   - Easy to extend and maintain with clearly defined modules.
+### Utility Modules
+- **File:** `file_io.py`
+- **Description:**
+  - Handles saving/loading data, results, and model checkpoints.
+- **File:** `indicators.py`
+- **Description:**
+  - Contains MACD and RSI calculation functions for feature engineering.
 
-## Project Workflow
+## Customization
+- Update `run_pipeline.py` to modify parameters like:
+  - `lookback`: Number of past timesteps.
+  - `eps_decay`: Rate at which exploration decreases.
+  - `lr`: Learning rate for optimization.
 
-1. **Data Loading**:
-   - Load financial and macroeconomic data using `data_processing.py`.
-   
-2. **Feature Engineering**:
-   - Generate MACD and RSI indicators for enhanced features.
+## Outputs
+- Training, validation, and test results are saved as CSV files in the project directory.
+- Model checkpoints are saved every 5 episodes in `model-{episode}.pth`.
 
-3. **Environment Initialization**:
-   - Create a `TradingEnvironment` with historical data.
+## Future Improvements
+- **Add More Indicators:** Enhance feature engineering with Bollinger Bands or stochastic oscillators.
+- **Hyperparameter Tuning:** Automate tuning using tools like Optuna.
+- **Advanced Models:** Experiment with attention mechanisms or LSTMs for improved performance.
+- **Visualization:** Add plots for cumulative returns and Sharpe ratios.
 
-4. **Agent Training**:
-   - Use the `DQNAgent` class to train a Transformer-based model.
-
-5. **Validation and Testing**:
-   - Evaluate the agent's performance using unseen data.
 
