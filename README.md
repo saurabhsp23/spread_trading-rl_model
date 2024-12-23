@@ -6,7 +6,7 @@ This project implements a trading environment using Deep Q-Learning (DQN) with a
 ## Project Structure
 
 ```
-project/
+src/
 │   ├── train.py          # Handles the training loop.
 │   ├── validate.py       # Validation logic and early stopping.
 │   ├── test.py           # Testing and result logging.
