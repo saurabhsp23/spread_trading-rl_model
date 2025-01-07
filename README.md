@@ -55,21 +55,6 @@ data/
   matplotlib
   ```
 
-### Steps to Run the Project
-
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
-   cd project
-   ```
-
-2. Prepare data files:
-   - Place JPY.xlsx, EUR.xlsx, AUD.xlsx, CAD.xlsx in the `data/` directory.
-
-3. Run the pipeline:
-   ```bash
-   python scripts/run_pipeline.py
-   ```
 
 ## Modularized Workflow
 
@@ -105,11 +90,6 @@ data/
 - **Description:**
   - Contains MACD and RSI calculation functions for feature engineering.
 
-## Customization
-- Update `run_pipeline.py` to modify parameters like:
-  - `lookback`: Number of past timesteps.
-  - `eps_decay`: Rate at which exploration decreases.
-  - `lr`: Learning rate for optimization.
 
 ## Outputs
 - Training, validation, and test results are saved as CSV files in the project directory.
